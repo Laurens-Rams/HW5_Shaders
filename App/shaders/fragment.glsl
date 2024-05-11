@@ -1,8 +1,11 @@
-varying vec3 vPosition;
+uniform sampler2D uMap;
+
+varying vec2 vUv;
 
 void main() {
-  float distance = length(vPosition);
-  float opacity = smoothstep(1000.0, 2700.0, distance);
-  vec3 color = vec3(0.0, 0.4, 1.0);
-  gl_FragColor = vec4(color, opacity);
+    // Sample the video texture
+    vec4 videoColor = texture2D(uMap, vUv);
+    
+    // Output the video color
+    gl_FragColor = videoColor;
 }
