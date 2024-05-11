@@ -14,16 +14,15 @@ void main() {
     
     vec3 newPosition = position;
     
-    // Sample the video texture
     vec4 videoColor = texture2D(uMap, vUv);
-    float brightness = dot(videoColor.rgb, vec3(0.299, 0.587, 0.114));  // Calculate brightness
+    float brightness = dot(videoColor.rgb, vec3(0.299, 0.587, 0.114)); 
 
     float mainDisplacement = brightness * uMainDisplacement;
     newPosition += normal * mainDisplacement;
     
     // noise-based displacement
     float noise = snoise(vec3(
-        0.1 * newPosition.x + uTime, 
+        0.07 * newPosition.x + uTime, 
         0.1 * newPosition.y, 
         0.1 * newPosition.z
     ));
@@ -31,7 +30,7 @@ void main() {
     float noiseDisplacement = smoothstep(-1.0, 1.0, noise);
     newPosition += normal * noiseDisplacement * uNoiseDisplacement;
     
-    float dampeningFactor = 0.8; 
+    float dampeningFactor = 0.7; 
     newPosition = mix(position, newPosition, dampeningFactor);
 
     gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);

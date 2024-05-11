@@ -170,7 +170,7 @@ export default class App {
 
       if (!this._userChangedMainDisplacement) {
         const targetMainDisplacement = this._settings.mainDisplacement;
-        const increment = 30.0 * delta; // Adjust this value to control the speed of animation
+        const increment = 30.0 * delta;
 
         if (this._mesh.material.uniforms.uMainDisplacement.value < targetMainDisplacement) {
           this._mesh.material.uniforms.uMainDisplacement.value = Math.min(this._mesh.material.uniforms.uMainDisplacement.value + increment, targetMainDisplacement);
